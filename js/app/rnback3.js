@@ -1,7 +1,6 @@
 ﻿__arrayColors=["Blue","Brown","Red","Green","Yellow","Purple","Gray"];
 arrayColors=["rgb(0,0,255)","rgb(165,42,42)","rgb(255,0,0)","rgb(0,128,0)","rgb(216, 242, 24)","rgb(128,0,128)","rgb(128,128,128)"];
 
-
 estadoEmpezar=0;
 empezar=0;
 delaySalida=0;
@@ -9,36 +8,6 @@ colorTextoSalida="";
 viejoPasadas=0;
 
 preventBackCount=0;
-
-function selectTime(def,x){
-
-  h=`
-    <select id="tt${x}" class="mySelect">
-      <option value="50">.05</option>
-      <option value="100">.1</option>
-      <option value="200">.2</option>
-      <option value="300">.3</option>
-      <option value="400">.4</option>
-      <option value="500">.5</option>
-      <option value="600">.6</option>
-      <option value="700">.7</option>
-      <option value="800">.8</option>
-      <option value="900">.9</option>
-      <option value="1000">1</option>
-      <option value="2000">2</option>
-      <option value="3000">3</option>
-      <option value="4000">4</option>
-      <option value="5000">5</option>
-      <option value="6000">6</option>
-    </select>
-  `;
-  $("#t"+x).html(h);
-  $("#tt"+x).val(def);
-}
-
-selectTime("1000","1");
-
-
 imagenDimension=600;
 
 $("#resultsList").hide();
@@ -47,7 +16,6 @@ $("#loading").hide();
 //$("#controls-div").hide();
 $("#stop1").hide();
 $("#clearResultsList").hide();
-
 
 function n(x){ return parseInt($("#"+x).val()); }
 
@@ -65,44 +33,7 @@ arrayPreloadImages=[];
 
 zPreload=0;
 imgLoadedCount=0;
-/*
-function preload() {
 
-    $("#preload").html(""); 
-
-    for(i=0;i<arrayPreloadImages.length;i++){
-
-      //console.log(`<img src="${arrayImages[i]}" id="imgPreload-${zPreload}">`);
-
-       $("#preload").append(`<img src="${arrayPreloadImages[i]}" id="imgPreload-${zPreload}"  width="32" height="32" style="opacity: 0.5;">`);
-
-       $(`#imgPreload-${zPreload}`).on("load",function(){
-          
-          imgLoadedCount++;
-
-          if(imgLoadedCount==arrayPreloadImages.length){      
-
-            //$("#screen").html(""); 
-            $("#preload").hide(); 
-            $("#loading").hide(); 
-             $("#stop1").show();
-            //$("#recall-btn").show(); 
-            $("#controls-div").show();
-
-            //console.log(imgLoadedCount);
-
-            setTimeout(play(1),500); 
-                         
-           // init(0);
-
-         }
-       });
-
-     zPreload++;
-
-  } //end for
-} //end preload
-*/
 
 bOnGame=0;
 
@@ -127,10 +58,7 @@ function actualizarErrores(){
 
 var perdidas=0;
 var perdidas1=0;
-var cantidadElementos=3;
-var cantidadLoci=2;
 
-var bVariable=1;
 var currentVariable=1;
 var realCantidadBack=1;
 var sel=0;
@@ -158,11 +86,6 @@ function play(_xxx){
 
     empezar=0;
 
-    bVariable=n("isVariable");
-
-    cantidadElementos=n("cantidadElementos");
-    cantidadLoci=n("cantidadLoci");
-
     realCantidadBack=parseInt($("#cantidadBack").html());
     cantidadBack1=parseInt($("#cantidadBack1").html());
     //console.log(realCantidadBack);
@@ -171,21 +94,17 @@ function play(_xxx){
     currentVariable=cantidadBack;
 
     $("#stop1").show();
-
     $("#resultsList").hide();
     
     bOnGame=1;
 
     imgLoadedCount=0;
 
-    //$("#preload").show(); 
-      //$("#loading").show(); 
-      //$("#controls-div").hide();
 
-      rndPorcentaje=parseInt($("#rndPorcentaje").val());
+    rndPorcentaje=parseInt($("#rndPorcentaje").val());
 
     salidas=[]; 
-     salidas1=[]; 
+    salidas1=[]; 
   
 
     currentPasada=0;
@@ -216,35 +135,14 @@ function play(_xxx){
     $("#ok").html(parseInt(ok)+parseInt(ok1));
     $("#results").html(""); 
 
-     arrayImages1=[0,1,2,3,4,5,6,7,8,9];
+    arrayImages1=[0,1,2,3,4,5,6,7,8,9];
 
-     var limpia = "";
+    var limpia = "";
     resultados = "";
     cantidadPalabras = 0;
 
-    // str = $("#input1").val();
-
-    // limpia = str.split("\n").join(" ");
-    // limpia = limpia.split("\t").join(" ");
-    // limpia = limpia.split("\r").join(" ");
-    // limpia = limpia.split(",").join(" ");
-    // limpia = limpia.split(".").join(" ");
-    // limpia = limpia.split(")").join(" ");
-    // limpia = limpia.split("(").join(" ");
-    // limpia = limpia.split(";").join(" ");
-    // limpia = limpia.split("-").join(" ");
-
-    // limpia = limpia.split("   ").join(" ");
-    // limpia = limpia.split("  ").join(" ");
-
-    // str = limpia;
-
-    // cadena=str.split(" ");
-    // cantidad=cadena.length;
     posicion = 0;
-
     viejoPasadas=posicion;
-
     perdidas=0;
     perdidas1=0;
 
@@ -293,113 +191,12 @@ function play(_xxx){
    bOk1=0;
 
 
-  //Loci match error
-  /*
-  if(currentPasada>cantidadBack && bOk==0){
-
-      _s=currentPasada-1;
-      _b=currentPasada-1-cantidadBack;
-
-      comparar=-1; comparar1=-1; comparar2=-1;
-
-      if(cantidadLoci==2)
-       comparar=salidas[_b][1];
-
-     if(cantidadLoci==3){
-       comparar=salidas[_b][1];
-       comparar1=salidas[_b][2];
-     }
-
-     if(cantidadLoci==4){
-       comparar=salidas[_b][1];
-       comparar1=salidas[_b][2];
-       comparar2=salidas[_b][3];
-     }
-
-     if(salidas[_s][0]==salidas[_b][0] && salidas[_s][1]==comparar && salidas[_s][2]==comparar1 && salidas[_s][3]==comparar2){
-        //console.log("e pm");
-         //error++;
-         $("#pm").css("color","red");
-         actualizarErrores();
-         setTimeout(function(){ $("#pm").css("color","black"); },500);
-     }
-    }
-  bOk=0;
-
-  //Number match error
-  if(currentPasada>cantidadBack && bOk1==0 && sAct>0){
-
-    _s=currentPasada-1;
-    _b=currentPasada-1-cantidadBack;
-
-    comparar=-1; comparar1=-1; comparar2=-1; comparar3=-1; comparar4=-1; comparar5=-1; comparar6=-1;
-
-     if(cantidadElementos==2)
-       comparar=salidas1[_b][1];
-
-     if(cantidadElementos==3){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-     }
-
-     if(cantidadElementos==4){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-     }
-
-     if(cantidadElementos==5){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-     }
-
-     if(cantidadElementos==6){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-     }
-
-     if(cantidadElementos==7){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-       comparar5=salidas1[_b][6];
-     }
-
-    if(cantidadElementos==8){
-       comparar=salidas1[_b][1];
-       comparar1=salidas1[_b][2];
-       comparar2=salidas1[_b][3];
-       comparar3=salidas1[_b][4];
-       comparar4=salidas1[_b][5];
-       comparar5=salidas1[_b][6];
-       comparar6=salidas1[_b][7];
-     }
-
-    if(salidas1[_s][0]==salidas1[_b][0] && salidas1[_s][1]==comparar && salidas1[_s][2]==comparar1 && salidas1[_s][3]==comparar2 && salidas1[_s][4]==comparar3  && salidas1[_s][5]==comparar4  && salidas1[_s][6]==comparar5  && salidas1[_s][7]==comparar6){
-       error1++;
-       $("#sm").css("color","red");
-       actualizarErrores();
-       setTimeout(function(){ $("#sm").css("color","black"); },500);
-    }
-  }*/
-  bOk1=0;
-
   if(currentPasada==pasadas){
 
     viejoPasadas=pasadas;
 
     console.log("hola");
 
-
-     //$("#stop1").hide();
-     //$("#resultsList").show();
 
       total_p = ok + error;
       total_s =  ok1 + error1;
@@ -416,16 +213,12 @@ function play(_xxx){
       if(total_ps==0)
         total_ps=1;
 
-      // porcentaje_ok = (total_ok * 100)/total_ps;
-      // porcentaje_ok = Math.round(porcentaje_ok);
 
       porcentaje_ok = (ok * 100)/(ok+error);
       porcentaje_ok = Math.round(porcentaje_ok);
 
       porcentaje_ok1 = (ok1 * 100)/(ok1+error1);
       porcentaje_ok1 = Math.round(porcentaje_ok1);
-
-      //agregarResultado(cantidadBack,porcentaje_ok);
 
       recomendacion="Same level";
       colorTextoSalida="blue"; 
@@ -456,40 +249,32 @@ function play(_xxx){
       }
 
       ////////
-
       // recomendacion="Same level";
       //colorTextoSalida="blue"; 
       if(porcentaje_ok1>=75){
-         // recomendacion="Level augmented";
-         cantidadBack1++;
-         // pasadas += ( 20 + (cantidadBack-1) * 6 );
+         
+         cantidadBack1++; 
          $("#cantidadBack1").html(cantidadBack1);
-         // $("#pasadas").html(pasadas);
-         //colorTextoSalida="green";
-      
+        
       }
       if(porcentaje_ok1<75 && porcentaje_ok1>=50){
-         // recomendacion="Keep on the same level";
+        
          perdidas1=0;
       }
       if(porcentaje_ok1<50){
          perdidas1++;
 
-         if(cantidadBack1>2){ cantidadBack1--; /*colorTextoSalida="red"; */} 
-
-         // pasadas += ( 20 + (cantidadBack-1) * 6 ) ;
+         if(cantidadBack1>2){ cantidadBack1--; } 
          $("#cantidadBack1").html(cantidadBack1);
         
-         
-         // recomendacion="If persist in this Score is recomended decrease the level. Low score count: " + perdidas; //decrease
-
       }
 
        $("#pasadas").html(currentPasada);
+
        if(cantidadBack>cantidadBack1)
-        pasadas += ( 20 + (cantidadBack-1) * 6 ) ;
-        else
-       pasadas += ( 20 + (cantidadBack1-1) * 6 ) ;   
+         pasadas += ( 20 + (cantidadBack-1) * 6 ) ;
+       else
+        pasadas += ( 20 + (cantidadBack1-1) * 6 ) ;   
 
      txtCentral=`${cantidadBack}-${cantidadBack1}`;
      $("#d11").html("<center>"+txtCentral+"</center>");
@@ -534,47 +319,22 @@ function play(_xxx){
       txt="<h3>Results</h3>" + positionTxt + " " + soundTxt + " " + imageTxt + " " + colorTxt + " " + vaTxt + " " + avTxt + "<br>" + sumaTxtTxt +
          "Score: "+ porcentaje_ok + "%<br>"; // + recomendacion;
 
-      // $("#results").html(txt);
-      //$("#canvas").html(`<div id="canvas11">Hello!<br>Here the instructions of the original nback game to guide you in locinback: <a href="http://brainworkshop.sourceforge.net/tutorial.html">http://brainworkshop.sourceforge.net/tutorial.html</a></div>`);
-
+      
       bOnGame=0;
 
-      // currentPasada=0;
-
-      // $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-
-      // limpiar();
-
-       // clearTimeout(killInterval);
-      // clearTimeout(kill2);
-      //  clearTimeout(kill3);
-
-      //  return;
-
       ok=0; error=0; ok1=0; error1=0;
-
-      // $("#myTable").css("border", "green solid 1px");
 
       actualizarOk(); actualizarErrores();
    }
 
-   /*
-    if(bVariable==1){
-    
-      currentVariable=_.random(1,realCantidadBack);
-      //console.log(realCantidadBack);
-      cantidadBack=currentVariable;
-
-    }*/
-
-
-   _r=_.random(1,100);
-   //console.log(_r);
-
    //Position
-   _txt="misma";
-   if((currentPasada>( /*viejoPasadas + */cantidadBack)  && _r<=rndPorcentaje)/* || currentPasada==2 */){
+   _txt="misma"; _r=_.random(1,100);
+
+
+   if(currentPasada>=cantidadBack  && _r<=rndPorcentaje){
+
       _poner = currentPasada-cantidadBack;
+
       __x=salidas[_poner][0];
       __y=salidas[_poner][1];
   
@@ -590,43 +350,19 @@ function play(_xxx){
          __x = _.random(0,2);
          __y = _.random(0,2);
 
-         // console.log(__x+"-"+__y)
-
-         console.log(_count);
-
          _count++;
 
-         if(_count==100) break;
-                  
-         if(__x!=1 || __y!=1){
-            if( currentPasada > ( /* viejoPasadas +*/ cantidadBack)  ){
-              // console.log(currentPasada-cantidadBack+""+cantidadBack)
-              // console.log(currentPasada-1)
+         //if(_count==100) break;
 
-              //console.log(currentPasada+"-"+cantidadBack+"-"+viejoPasadas)
+         if(__x==1 && __y==1) continue;
 
-               if( ( __x!=salidas[currentPasada-cantidadBack][0] || __y!=salidas[currentPasada-cantidadBack][1] ) && ( __x!=salidas[currentPasada-1][0] || __y!=salidas[currentPasada-1][1] )  ){
-                  break;
-               }
-            }else{
+         if( ( currentPasada > cantidadBack) && (__x==salidas[currentPasada-cantidadBack][0] && __y==salidas[currentPasada-cantidadBack][1] ) ) continue;
+       
 
-               /*
-               if(currentPasada>0){
-                   if(_x!=salidas[currentPasada-1][0] && _y!=salidas[currentPasada-1][1] && _z!=salidas[currentPasada-1][2])
-                     break;
+         if(currentPasada >= 1 &&  ( __x==salidas[currentPasada-1][0] && __y==salidas[currentPasada-1][1] ) ) continue;
 
-               }
-               if(currentPasada==0)*/
+         break;
 
-                if(currentPasada==0 /*|| ( __x!=salidas[currentPasada-1][0] && __y!=salidas[currentPasada-1][1] ) */)
-                  break; 
-
-
-            }
-              
-         }
-         
-       // break;
       }//for  
    }//currentPasada>cantidadBack
 
@@ -634,15 +370,7 @@ function play(_xxx){
   _r=_.random(1,100);;
   _txt="misma";
 
-  // cifras=n("cifras");
-
-  // if(cifras==2){ myMax=99; myMin=10; } 
-  // if(cifras==3){  myMax=999; myMin=110; }
-  // if(cifras==4){ myMax=9999; myMin=1010; } 
-  // if(cifras==5){ myMax=99999; myMin=10010; } 
-
-  
-
+ 
   if(currentPasada>cantidadBack1 && _r<=rndPorcentaje){
 
     _poner = currentPasada-cantidadBack1;
@@ -651,28 +379,17 @@ function play(_xxx){
       
     mismo1++; bMismo=1;
 
-    //console.log("vis & n-vis: " + _myImagen + "-" + _myImagen2 + "-" + _myImagen3);   
-   }else{//currentPasada>cantidadBack
+      
+   }else{ //currentPasada>cantidadBack
       _txt="random";
       
       contador=0;
 
       bMismo=0;
 
-      /*
-      _pon = currentPasada-cantidadBack;
-
-
-      if(currentPasada>cantidadBack)
-        posibleMismo = salidas1[_pon];
-      else
-        posibleMismo = _.random(0,9)+""+_.random(0,9);
-      */
+      
 
       for(;;){
-
-         //_myImagen1=arrayImages1[_.random(0,9)]+""+arrayImages1[_.random(0,9)]; 
-         // _myImagen1=colores_array[_.random(0,colores_array.length-1)]; 
 
           _myImagen1 = arrayColors[_.random(0,arrayColors.length-1)];
 
@@ -693,7 +410,6 @@ function play(_xxx){
 
    //console.log(salidas[currentPasada])
 
-
    /*if(empezar)*/ delaySalida=300;
 
    salidas[currentPasada][0] = __x;
@@ -701,13 +417,7 @@ function play(_xxx){
 
    if(!empezar) play1();
 
-   
-
    empezar=1;
-
-   //console.log(currentPasada+"-"+__x+"-"+__y+"-"+ salidas[currentPasada][1]);
-   //console.log(salidas[currentPasada][1]);
-
 
   salidas1[currentPasada]=[];
   salidas1[currentPasada]=_myImagen1;
@@ -732,31 +442,22 @@ function play(_xxx){
   __poner="";
   wbf=n("wordsByFlash");
 
-  // for(j=0;j<wbf;j++){
 
-  //   __poner+=" "+cadena[posicion];
-  //   posicion++;
-  // }
-
-  // $("#d"+ salidas[currentPasada][0] + "" + salidas[currentPasada][1] ).html(`<center><b><span style="color: ${r};">${__poner}</span></b></center>`);
-
-
-  //muestra();
 
   colorTextoSalida=_myImagen1;
   console.log(colorTextoSalida);
 
-  //kill2=setTimeout(function(){ muestra(); },300);
+  
     
    bIntroducir=1; bIntroducir1=1; bIntroducir2=1; bIntroducir3=1;  bIntroducir4=1;  bIntroducir5=1;
-   // pasadas--;
+   
 
    $("#pasadas").html(currentPasada);
 
    estadoEmpezar=1;
 
-  killInterval = setTimeout(function(){ /* $("#myTable").css("border", "black solid 1px"); */  currentPasada++; play(1);},myInterval);
-  kill4=setTimeout(function(){ /*limpiar();*/ },myInterval1);
+  killInterval = setTimeout(function(){  currentPasada++; play(1); },myInterval);
+  kill4=setTimeout(function(){  },myInterval1);
    
 
 }//en play()
@@ -764,130 +465,10 @@ function play(_xxx){
 var kill4;
 var poner1;
 var poner;
-
-function killAll(){
-  
-}
-
-function muestra(){
-
-  
-
-  // arraySel=[0,2,4,6,8,10,12,14,16,18,20,22,24];
-
-  // poner="";
-  // poner1="";
-
-  // /*
-  //  if(time<1000){
-  //   sel=_.random(0,max-1);
-  //   }else{
-
-  //     sel=_.random(0,max-1);
-  //   }*/
-
-  // for(;;){
-
-  //   sel=arraySel[_.random(0,arraySel.length-1)];
-
-  //   if(sel<max-1) break;
-
-  // }
-
-  // for(;;){
-
-  //   sel1=arraySel[_.random(0,arraySel.length-1)];
-
-  //   if(sel1<max-1  && sel1!=sel) break;
-   
-  // }
-
-  // bTruculento=0;
-  // if(!bMismo && _.random(1,100)<20){bTruculento=1; console.log("truculento"); } 
-  
-  // for(let i=0;i<max;i++){
-  //   space="";    
-  //   if(i%2==0 && i!=0) space="&nbsp;";
-
-  //   if(i>9 && i%2==0){
-  //     space="<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-
-  //   }
-
-  //   rnd=_.random(0,9);
-
-  //   if(bTruculento && (i==sel1 || i==sel1+1) ){
-  //     if(i==sel1){ rnd=posibleMismo[0]; }
-  //     if(i==sel1+1){ rnd=posibleMismo[1]; }
-
-
-  //   }else{
-  //     if(i==sel){ rnd=salidas1[currentPasada][0]; }
-  //     if(i==sel+1){ rnd=salidas1[currentPasada][1]; }
-  //   }
-    
-  //   poner+=(space+rnd);
-  //   poner1+=""+rnd;
-  //   //console.log(poner);
-  // }    
-  // //console.log(salidas[currentPasada]);
-
-
-
-  // $("#d"+ salidas[currentPasada][0] + "" + salidas[currentPasada][1] ).html("<center><b>"+poner+"</b></center>");
-
-
-  pregunta();
-
-  // kill2=setTimeout(function(){
-  //   $("#d"+ salidas[currentPasada][0] + "" + salidas[currentPasada][1]).html("");
-
-  //   kill3=setTimeout(function(){ pregunta(); },n("preguntaTime"));
-  //   //pregunta();
-  // },time);
-
-
-}
-
-
 var sel=0;
 var sel1=0;
 
-function pregunta(){
 
-  // poner="";
-  // for(i=0;i<max;i++){
-  //   space="";    
-  //   if(i%2==0 && i!=0) space="&nbsp;";
-
-  //   if(i>9 && i%2==0){
-  //     space="<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-
-  //   }
-
-
-  //   if(i!=sel && i!=sel+1)
-  //     poner+=space+"0";
-  //   else
-  //     poner+=space+"1";
-
-  // }
-  // $("#d"+salidas[currentPasada][0]+salidas[currentPasada][1]).html("<center><b>"+poner+"</b></center>");
-  
-  // at=1;
-  // if(at!=0){
-
-  //   kill2=setTimeout(function(){
-
-  //      console.log("limpiar");
-
-
-
-  //      $("#d"+salidas[currentPasada][0]+salidas[currentPasada][1]).html("");
-
-  //   },500);
-  // }
-}
 
 function limpiar(){
   
@@ -1242,50 +823,7 @@ function init(x){
     cadena=str.split(" ");
     cantidad=cadena.length;
     posicion = 0;
-
-    // start();
-
-    if(myExperiment==8){
-      clearInterval(kill6);
-
-      kill6=setInterval(function(){
-
-        maxChange=_.random(0,10);
-        $("#left-screen").css("padding-left",maxChange+"px");
-        $("#right-screen").css("padding-right",maxChange+"px");
-        $("#left-screen").css("padding-top",maxChange+"px");
-        $("#right-screen").css("padding-top",maxChange+"px");
-
-        $("#center-screen").css("padding-left",maxChange+"px");
-        $("#center-screen").css("padding-top",maxChange+"px");
-
-        /*
-        $("#up-screen").html("");
-        $("#down-screen").html("");
-        $("#center-screen").html("");
-
-        $("#left-up-screen").html("");
-        $("#right-up-screen").html("");
-        $("#left-down-screen").html("");
-        $("#right-down-screen").html("");*/
-
-
-
-      },1);
-
-
-    }
-
-    /*
-    if(bCW){
-      for(i=0;i<cadena.length;i++){
-        if(cadena[i].length>6){
-          cadena[i]=cadena[i].substr(0, 6);
-          console.log(cadena[i]);
-        }
-      }
-    }*/
-
+  
     //console.log(arrayRandomWord);
     bLugar=1;
 
@@ -1298,295 +836,22 @@ function init(x){
 
   clearTimeout(killIntervalRc);
 
-  if(myExperiment==4 || myExperiment==5){
-    bColors=0;
-    wordsByFlash=4;
-  } 
-  if(myExperiment==6 || myExperiment==7 ){
-    bColors=0;
-    wordsByFlash=2;
-  } 
   
   if(wordsByFlash==1){
     mostrar = cadena[posicion];
 
   }
 
-  if(wordsByFlash==2){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] ;
+  if(wordsByFlash==2){ mostrar = cadena[posicion] + " " + cadena[posicion+1] ; }
+  if(wordsByFlash==3){ mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] ; }
+  if(wordsByFlash==4){ mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] ; }
+  if(wordsByFlash==5){ mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4]; }
+  if(wordsByFlash==6){ mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4] + " " + cadena[posicion+5]; }
+  if(wordsByFlash==7){ mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4] + " " + cadena[posicion+5] + " " + cadena[posicion+6]; }
 
-  }
-
-  if(wordsByFlash==3){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] ;
-
-  }
-
-  if(wordsByFlash==4){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] ;
-
-  }
-  
-  if(wordsByFlash==5){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4];
-
-  }
-
-  if(wordsByFlash==6){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4] + " " + cadena[posicion+5];
-
-  }
-
-  if(wordsByFlash==7){
-    mostrar = cadena[posicion] + " " + cadena[posicion+1] + " " + cadena[posicion+2] + " " + cadena[posicion+3] + " " + cadena[posicion+4] + " " + cadena[posicion+5] + " " + cadena[posicion+6];
-
-  }
-  //console.log(cadena);
 
   bLugar=!bLugar;
 
-  $("#left-screen").html("");
-  $("#right-screen").html("");
-  $("#up-screen").html("");
-  $("#down-screen").html("");
-  $("#center-screen").html("");
-
-  $("#left-up-screen").html("");
-  $("#right-up-screen").html("");
-  $("#left-down-screen").html("");
-  $("#right-down-screen").html("");
-
-  if(readingMode==1){
-  
-
-    if(bLugar){
-
-      lugar="right-screen";
-      $("#left-screen").html("");
-
-    }else{
-      lugar="left-screen";
-      $("#right-screen").html("");
-
-    }
-
-  }
-
-  if(readingMode==2){
-
-    
-
-    if(bLugar){
-
-      lugar="down-screen";
-      $("#up-screen").html("");
-
-    }else{
-      lugar="up-screen";
-      $("#down-screen").html("");
-
-    }
-
-  }
-
-  if(readingMode==3){
-
-    if(circleFase==0){
-      lugar="left-screen";
-    }
-
-    if(circleFase==1){
-      lugar="up-screen";
-      
-    } 
-
-    if(circleFase==2){
-
-      lugar="right-screen";
-    }
-
-    if(circleFase==3){
-      lugar="down-screen";
-    
-    }
-    
-
-    circleFase++;
-    if(circleFase==4)
-      circleFase=0;
-
-  }
-
-  if(readingMode==4){
-
-
-    if(circleFase==2){
-      lugar="left-screen";
-    }
-
-    if(circleFase==1){
-      lugar="up-screen";
-      
-    } 
-
-    if(circleFase==0){
-
-      lugar="right-screen";
-    }
-
-    if(circleFase==3){
-      lugar="down-screen";
-    
-    }
-    
-
-    circleFase++;
-    if(circleFase==4)
-      circleFase=0;
-
-  }
-
-  if(readingMode==5){
-
-    _circleFase=circleFase;
-
-    for(;;){
-
-      circleFase=_.random(0,3);
-
-      if(circleFase!=_circleFase)
-        break;
-    }
-
-    if(circleFase==2){
-      lugar="left-screen";
-    }
-
-    if(circleFase==1){
-      lugar="up-screen";
-      
-    } 
-
-    if(circleFase==0){
-
-      lugar="right-screen";
-    }
-
-    if(circleFase==3){
-      lugar="down-screen";
-    
-    }
-  
-
-  }
-
-  if(readingMode==6){
-    $("#left-screen").html("");
-    $("#right-screen").html("");
-    $("#up-screen").html("");
-    $("#down-screen").html("");
-    $("#center-screen").html("");
-
-    lugar="center-screen";
-
-  }
-
-  if(readingMode==7){
-
-
-    if(circleFase==2){
-      lugar="left-down-screen";
-    }
-
-    if(circleFase==1){
-      lugar="right-up-screen";
-      
-    } 
-
-    if(circleFase==0){
-
-      lugar="left-up-screen";
-    }
-
-    if(circleFase==3){
-      lugar="right-down-screen";
-    
-    }
-    
-
-    circleFase++;
-    if(circleFase==4)
-      circleFase=0;
-
-  }
-
-  if(readingMode==8){
-
-
-    if(circleFase==2){
-      lugar="right-up-screen";
-    }
-
-    if(circleFase==1){
-      lugar="right-down-screen";
-      
-    } 
-
-    if(circleFase==0){
-
-      lugar="left-up-screen";
-    }
-
-    if(circleFase==3){
-      lugar="left-down-screen";
-    
-    }
-    
-
-    circleFase++;
-    if(circleFase==4)
-      circleFase=0;
-
-  }
-
-  if(readingMode==9){
-
-    _circleFase=circleFase;
-
-    for(;;){
-
-      circleFase=_.random(0,3);
-
-      if(circleFase!=_circleFase)
-        break;
-    }
-
-
-    if(circleFase==2){
-      lugar="right-up-screen";
-    }
-
-    if(circleFase==1){
-      lugar="right-down-screen";
-      
-    } 
-
-    if(circleFase==0){
-
-      lugar="left-up-screen";
-    }
-
-    if(circleFase==3){
-      lugar="left-down-screen";
-    
-    }
-    
-    /*
-    circleFase++;
-    if(circleFase==4)
-      circleFase=0;*/
-
-  }
 
   //console.log(readingMode);
 
@@ -1597,206 +862,18 @@ function init(x){
 
   transform="";
 
-  if(myTransformation==2){
-    
-    transform="transform:rotateX(180deg);";
-    
-  }
-  if(myTransformation==3){
-    transform="transform:rotateY(180deg);";
-          
-  }
-  /*
-  if(myTransformation==4){
-    transform="transform:rotateX(180deg) ";
-    transform+="transform:rotateY(180deg);";
-  
-
-
-  }*/
-  if(myTransformation==4){
-
-    if(bLugar){
-
-      //lugar="right-screen";
-      //$("#left-screen").html("");
-      transform="transform:skewY(30deg);"
-
-    }else{
-      //lugar="left-screen";
-      //$("#right-screen").html("");
-      transform="transform:skewY(-30deg);"
-
-    }
-    
-    
-          
-  }
-
-  if(myTransformation==5){
-    
-    transform="transform:skewY("+_.random(-40,40)+"deg);"
-          
-  }
 
   //genero la impresion
   txtLength=0;
 
-  emo="";
-
-  if(myExperiment==9){
-    letras_emo="abcdefghilmnopqrstuvy".split("");
-    rnd=_.random(0,letras_emo.length-1);
-    cara=letras_emo[rnd];
-
-    if(cara=="a" || cara=="e"  || cara=="n" || cara=="o"  || cara=="r"  || cara=="s")
-      cara+=_.random(1,4);
-
-    poner_1=`<img src="emociones/${cara}.gif" width="74" height="100">`;
-    emo=`<center>${poner_1}</center><br>`;
+  //$("#"+lugar).html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+mostrar+`</span></div>`);
 
 
-  }
-
-  if(myExperiment==10){
-    a_1=["female","male"];
-    rnd=_.random(1,155);
-    rnd1=_.random(0,1);
-    sexo=a_1[rnd1];
-
-    poner_1=`<img src="faces/${sexo}/${rnd}.png" width="74" height="100">`;
-    emo=`<center>${poner_1}</center><br>`;
 
 
-  }
-  
-  if(bColors){
-
-    if(bRc){
-
-      
-
-      killIntervalRc=setInterval(function(){
-
-        poneme="";
-        for(i=0;i<mostrar.length;i++){
-
-          
-
-          if(mostrar[i]==" "){
-            poneme += `<span style="color: black;">&nbsp;</span>`;
-
-          }else{
-            poneme += `${emo}<span style="color: ${random_color('rgb')}; text-shadow: 1px 1px ${random_color('rgb')}; font-size: ${fontSize}px;">${mostrar[i]}</span>`;
-
-          }
-
-          
-        }
-
-        $("#"+lugar).html(`<div style="${transform}">`+poneme+"</div>");
-
-
-      },10);
-
-    }else{
-      poneme="";
-      for(i=0;i<mostrar.length;i++){
-
-        if(mostrar[i]==" "){
-          poneme += `<span style="color: black;">&nbsp;</span>`;
-
-        }else{
-          poneme += `<span style="color: ${abc1[mostrar[i]]}; text-shadow: 1px 1px gray;  font-size: ${fontSize}px;">${mostrar[i]}</span>`;
-
-        }
-
-        
-      }
-
-      $("#"+lugar).html(`${emo}<div style="${transform}">`+poneme+"</div>");
-
-
-    }
-
-  }else{
-    if(myExperiment==4 || myExperiment==5 || myExperiment==6 || myExperiment==7){
-
-
-      if(myExperiment==4){
-        $("#left-up-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion] +`</span></div>`);
-        $("#right-up-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+1] +`</span></div>`);
-        $("#left-down-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+2] +`</span></div>`);
-        $("#right-down-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+3] +`</span></div>`);
-
-      }
-      if(myExperiment==5){
-        $("#left-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion] +`</span></div>`);
-        $("#up-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+1] +`</span></div>`);
-        $("#right-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+2] +`</span></div>`);
-        $("#down-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+3] +`</span></div>`);
-
-      }
-      if(myExperiment==6){
-        $("#left-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion] +`</span></div>`);
-        $("#right-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+1] +`</span></div>`);
-        
-
-      }
-      if(myExperiment==7){
-        $("#up-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion] +`</span></div>`);
-        $("#down-screen").html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+cadena[posicion+1] +`</span></div>`);
-      }
-
-      
-
-
-    }else{//myExperiment
-
-      if(myExperiment==3){
-        _p="";
-        for(kk=0;kk<mostrar.length;kk++){
-
-          if(kk==0 || mostrar[kk+1]==" " || kk==mostrar.length-1){
-            _p+=`<span class="t-m">${mostrar[kk]}</span>`;
-          }
-          else
-          {
-            _p+=`<span class="t-e">${mostrar[kk]}</span>`;
-          }
-
-        }
-        mostrar = _p;
-      }
-
-      $("#"+lugar).html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+mostrar+`</span></div>`);
-
-      if(myExperiment==3){
-        $(".t-e").css("color","black");
-        setTimeout(function(){ $(".t-e").css("color",currentColor); }, 50 );
-
-      }
-  
-    }//else myExperiment
-    txtLength=mostrar.length;
+  txtLength=mostrar.length;
     
 
-    /*
-
-    var Hello = React.createClass({
-      displayName: 'Hello',
-      render: function() {
-        return React.createElement("div", null, "", this.props.name);
-      }
-    });
-
-    ReactDOM.render(
-      React.createElement(Hello, {name: mostrar}),
-      document.getElementById(lugar)
-    );
-    */
-
-  }
 
   for(i=0;i<3;i++){
     for(j=0;j<3;j++){
@@ -1809,7 +886,7 @@ function init(x){
 
   }
 
-   if(posicion>cantidad){
+  if(posicion>cantidad){
     stopFlash();
     return;
 
@@ -1830,9 +907,6 @@ function init(x){
 
   }
   
-
- 
-
   calcularTiempo();
 
   velocity=n("velocityFlash");
@@ -1852,8 +926,6 @@ function init(x){
 
   //console.log( ( 60000/n("velocityFlash") ) * wordsByFlash );
 
-  
-  
 }
 
 function calcularTiempo(){
@@ -1999,7 +1071,7 @@ if(ww<1000){
   $("#control").css("zoom","2")
   $("#rnd-btn").css("zoom","3")
   $("#myTable td").css("font-size","40px")
-  $("#rndPorcentaje").val("25")
+  $("#rndPorcentaje").val("20")
 }
 
 // $("#mas1").click();
