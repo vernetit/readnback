@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Read N-back 3</title>
+  <title>Read N-back</title>
 
   <meta name="description" content="Read N-Back">
   <meta name="keywords" content="mental training, memory, working memory">
@@ -153,66 +153,15 @@
   <option value="4">4 loci</option>
 </select> &nbsp;
 </span>
+&nbsp;
+<input type="number" value="8" id="milis-val" class="inp-num" style="width: 50px; display:none;">
 
- <select id="cantidadElementos" onchange="actualizaElementos(this.value);" style="display:none;">
-  <option value="1" selected>1 object</option>
-  <option value="2">2 objects</option>
-  <option value="3">3 objects</option>
-  <option value="4">4 objects</option>
-  <option value="5">5 objects</option>
-  <option value="6">6 objects</option>
-  <option value="7">7 objects</option>
-  <option value="8">8 objects</option>
-</select> &nbsp;
-<span id="t1" style="display:none;"></span> <input type="number" value="8" id="milis-val" class="inp-num" style="width: 50px; display:none;">
-<select id="preguntaTime" class="mySelect" style="display:none;">
-  <option value="50">.05</option>
-  <option value="100">.1</option>
-  <option value="200">.2</option>
-  <option value="300">.3</option>
-  <option value="400">.4</option>
-  <option value="500">.5</option>
-  <option value="600"  selected>.6</option>
-  <option value="700">.7</option>
-  <option value="800">.8</option>
-  <option value="900">.9</option>
-  <option value="1000">1</option>
-</select>
 
 <b>
  <a href="#" id="start" onclick="setTimeout(function(){play(0)},300);">Play</a>&nbsp;
  <a href="#" id="stop1">Stop&nbsp;</a>
 </b> 
 
-<select id="cifras" style="/*width: 55px*/ display:none;">
-  <option value="2" selected>2 digits</option>
-  <option value="3">3 digits</option>
-  <option value="4">4 digits</option>
-  <option value="5">5 digits</option>
-</select>
-
-<!-- <select id="wordsByFlash" onchange="/*wordsByFlash=n('wordsByFlash');*/">   
-    <option value="1">1w</option>
-    <option value="2">2w</option>
-    <option value="3">3w</option>
-    <option value="4">4w</option>
-    <option value="5">5w</option>
-    <option value="6">6w</option>
-    <option value="7">7w</option>
-    <option value="8" selected>8w</option>
-    <option value="9">9w</option>
-    <option value="10">10w</option>
-    <option value="11">11w</option>
-    <option value="12">12w</option>
-    <option value="13">13w</option>
-    <option value="14">14w</option>
-</select> -->
-
-<select id="operadores" style="width: 55px; display: none;">
-  <option value="1"  selected>+</option>
-  <option value="2">+-*/ experimental</option>
-  <option value="3">+- experimental</option>
-</select>
 
  <span style="">
  <span>t: <input type="text" value="3000" id="timeValue" style="width: 30px;">&nbsp;<input type="text" value="1000" id="timeValue1" style="width: 28px; display:none;"></span>&nbsp;
@@ -221,17 +170,11 @@
 
  <span class="oke">ok: <span id="ok">0</span>&nbsp;</span>
  <span class="oke">E: <span id="error">0</span>&nbsp;</span>
-
-<select id="imagenesTipos" style="width: 100px; display: none;">
-  <option value="1" selected>IAM OpenDb</option>
-  <option value="2">Emotions</option>
-  <option value="3">flags</option>
-  <option value="4">faces</option>
-</select> &nbsp;
+&nbsp;
 
 %: <input type="text" value="20" id="rndPorcentaje" style="width: 25px;">&nbsp; <!--deffault: 20-->
-<? include "otherNback.php"; ?>
-<a href="#" onclick="alert('Read N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nColor n-back = 0 (color is desactivated)\nThis software is experimental and may contain errors.\nLicense: MIT\nSource Code: https://github.com/vernetit/3dnback\nContact: robertchalean@gmail.com');">?</a>
+<? @include "otherNback.php"; ?>
+<a href="#" onclick="alert('Read N-Back\To learn the n-back trainning go to http://brainworkshop.sourceforge.net/tutorial.html\n%: is the probability of elements repetition\nColor n-back = 0 (color is desactivated)\nThis software is experimental and may contain errors.\nLicense: MIT\nSource Code: https://github.com/vernetit/readnback\nContact: robertchalean@gmail.com');">?</a>
 &nbsp;<div class="fb-share-button" data-href="http://competicionmental.appspot.com/router?page=rnback3" data-layout="button_count" style="float: right;"></div>
 </div> <!-- Fin Controles -->
 <br>
@@ -262,29 +205,18 @@
   </div>
 </div>
 <div style="" id="controls-r"></div>
-<!--
-  <div id="resultsList"></div>
-  <br><input type="button" name="" value="clear" id="clearResultsList">
-</div>
--->
+
  <!-- Fin Canvas - Resultados -->
 <div style="clear: both"></div>
 <!-- Botonera -->
 <br>
 <center>
 <div id="controls-div" style="width:700px;">
+
 <input type="button" value="A: Loci Match" id="pm" style="font-size: 20px; zoom: 1.2;">
-
-<!--
-<input type="button" value="S: vis and n-vis" id="vvm" style="">
-<input type="button" value="D: vis and n-audio" id="vam" style="">
-<input type="button" value="J: audio and n-vis" id="avm" style="">
-<input type="button" value="F: Color Match" id="cm" style="">
-<input type="button" value="J: Image Match" id="im" style="">
--->
-
 <input type="button" value="L: Color Match" id="sm" style="font-size: 20px; zoom: 1.2; /*display:none;*/">
-<input type="button" value="N: Next" id="next-btn" style="display:none;">
+
+
 </div>
 </center>
 
