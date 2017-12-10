@@ -284,40 +284,7 @@ function play(_xxx){
       //ok=1; ok1=1; ok2=1; ok3=1; error=1; error1=1; error2=1; error3=1;  
 
       positionTxt = ""; soundTxt = ""; imageTxt= ""; colorTxt=""; vaTxt=""; avTxt="";
-      if(ok!=0 || error!=0){
-
-        positionTxt="Position: "+ok+"-"+error;
-
-      }
-      if(ok1!=0 || error1!=0){
-
-        soundTxt="Numbers: "+ok1+"-"+error1;
-
-      }
-
-       if(ok2!=0 || error2!=0){
-
-        imageTxt="images: "+ok2+"-"+error2;
-      }
-      if(ok3!=0 || error3!=0){
-
-        colorTxt = "colors: "+ok3+"-"+error3;
-      }
-      if(ok4!=0 || error4!=0){
-
-        vaTxt = "vis & n-audio: "+ok4+"-"+error4;
-      }
-      if(ok5!=0 || error5!=0){
-
-        avTxt = "audio & n-vis: "+ok5+"-"+error5;
-      }
-      sumaTxtTxt="";
-      if(iAct==4){
-        sumaTxtTxt=" Sum of numbers= " + acumuladorSuma + "<br>";
-      }
-
-      txt="<h3>Results</h3>" + positionTxt + " " + soundTxt + " " + imageTxt + " " + colorTxt + " " + vaTxt + " " + avTxt + "<br>" + sumaTxtTxt +
-         "Score: "+ porcentaje_ok + "%<br>"; // + recomendacion;
+      txt=""; // + recomendacion;
 
       
       bOnGame=0;
@@ -337,8 +304,25 @@ function play(_xxx){
 
       __x=salidas[_poner][0];
       __y=salidas[_poner][1];
-  
+
       mismo++;
+
+       if ( __x==salidas[currentPasada-1][0] && __y==salidas[currentPasada-1][1] ){
+
+        mismo--;
+
+         for(;;){
+
+          __x = _.random(0,2); __y = _.random(0,2);
+
+          if ( __x==salidas[currentPasada-1][0] && __y==salidas[currentPasada-1][1] ) continue;
+
+          break;
+         }
+
+       }
+
+      
      
    }else{
       _txt="random";  
@@ -347,8 +331,7 @@ function play(_xxx){
 
       for(;;){
        
-         __x = _.random(0,2);
-         __y = _.random(0,2);
+         __x = _.random(0,2); __y = _.random(0,2);
 
          _count++;
 
@@ -410,7 +393,7 @@ function play(_xxx){
 
    //console.log(salidas[currentPasada])
 
-   /*if(empezar)*/ delaySalida=300;
+   /*if(empezar)*/ delaySalida=250;
 
    salidas[currentPasada][0] = __x;
    salidas[currentPasada][1] = __y;
@@ -603,6 +586,8 @@ $("#mas").click(function(){
   clearTimeout(kill3);
     perdidas=0;
     perdidas1=0;
+
+    ajustarColor();
     
 
  });
@@ -618,6 +603,7 @@ $("#mas").click(function(){
     clearTimeout(killInterval);
     clearTimeout(kill2);
   clearTimeout(kill3);
+  ajustarColor();
 
  });
 
@@ -661,7 +647,7 @@ $("#mas").click(function(){
 
    });
 
-   $("#sm, #controls-r").click(function(){
+   $("#sm, #controls-r ,#footer-r").click(function(){
 
 
          if(bIntroducir1){
@@ -699,15 +685,19 @@ $("#mas").click(function(){
 });
 
 $("#stop1").click(function(){
-    $("#stop1").hide();
+   
+  detener();
+});
+
+function detener(){
+   $("#stop1").hide();
     clearTimeout(killInterval);
     clearTimeout(kill2);
     clearTimeout(kill3);
     stopFlash();
     bOnGame=0;
     limpiar();
-
-});
+}
 
 
 if(bMobile==1){
@@ -833,8 +823,11 @@ function init(x){
 
   }
 
-
   clearTimeout(killIntervalRc);
+
+  if(posicion>=cantidad){
+    detener(); return;
+  }
 
   
   if(wordsByFlash==1){
@@ -865,15 +858,8 @@ function init(x){
 
   //genero la impresion
   txtLength=0;
-
-  //$("#"+lugar).html(`<div style="${transform}"><span style="font-size: ${fontSize}px;">`+mostrar+`</span></div>`);
-
-
-
-
   txtLength=mostrar.length;
     
-
 
   for(i=0;i<3;i++){
     for(j=0;j<3;j++){
@@ -886,11 +872,7 @@ function init(x){
 
   }
 
-  if(posicion>cantidad){
-    stopFlash();
-    return;
-
-  } 
+ 
 
 
   if(estadoEmpezar){
@@ -901,7 +883,6 @@ function init(x){
     $("#d"+ salidas[currentPasada][0] + "" + salidas[currentPasada][1] ).html(`<center><b><span style="color: ${colorTextoSalida};">${mostrar}</span></b></center>`);
     // colorTextoSalida="black";
     
-
     posicion+=wordsByFlash;
 
 
@@ -910,13 +891,6 @@ function init(x){
   calcularTiempo();
 
   velocity=n("velocityFlash");
-  if(myExperiment==2){
-    if(txtLength>30){
-      velocity=250;
-      console.log("retardo")
-    }
-  }
-
 
   killInterval777=setTimeout(function(){ init() },  ( 60000/ velocity ) * wordsByFlash + delaySalida  );
 
@@ -996,6 +970,18 @@ var getDuration = function(millis){
   return dur.hours+":"+dur.minutes+":"+dur.seconds;//+":"+dur.millis;
 };
 
+function ajustarColor(){
+  if(cantidadBack1==0){
+    $("#footer-r").hide();
+    $("#footer-l").css("width","100%");
+
+  }else{
+    $("#footer-r").show();
+    $("#footer-l").css("width","50%");
+
+  }
+}
+
 
 function quitaAcentos(str){ 
   for (var i=0;i<str.length;i++){ 
@@ -1024,17 +1010,7 @@ function stopFlash(){
     
   }
   mostrar="";
-  $("#left-screen").html("Emdr");
-  $("#right-screen").html("Reader!");
-  $("#up-screen").html(":)");
-  $("#down-screen").html(":)");
 
-  $("#center-screen").html("");
-
-  $("#left-up-screen").html("");
-  $("#right-up-screen").html("");
-  $("#left-down-screen").html("");
-  $("#right-down-screen").html("");
 
   iniciar=1;
 
@@ -1063,7 +1039,7 @@ if(ww<1000){
   $("#controls-l").hide();
   $("#controls-r").hide();
 
-  $("#color-n-back").hide();
+ // $("#color-n-back").hide();
   $("#sm").hide();
   $("#pm").hide();
 
@@ -1072,6 +1048,10 @@ if(ww<1000){
   $("#rnd-btn").css("zoom","3")
   $("#myTable td").css("font-size","40px")
   $("#rndPorcentaje").val("20")
+
+  $("#footer-r").hide();
+  $("#footer-l").css("width","100%");
+
 }
 
 // $("#mas1").click();
