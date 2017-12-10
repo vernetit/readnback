@@ -129,10 +129,7 @@
  <a href="#" id="mas" style="text-decoration:none; color: #7D0552;"><b>+</b></a> 
  <span id="cantidadBack">2</span>
  <a href="#" id="menos"  style="text-decoration:none; color: #7D0552;"><b>-</b></a>
- <select id="isVariable" onchange="actualizaVariable(this.value);" style="display:none;">
-  <option value="1" selected>Variable</option>
-  <option value="2">noVariable</option>
-</select> &nbsp;
+  &nbsp;
   
 
 <span id="color-n-back">
@@ -145,14 +142,7 @@
 
 [Back]&nbsp;
 
-<span style="display: none;">
-<select id="cantidadLoci" style="width: 55px" onchange="actualizaLoci(this.value);" style="display:none;">
-  <option value="1" selected>1 loci</option>
-  <option value="2">2 loci</option>
-  <option value="3">3 loci</option>
-  <option value="4">4 loci</option>
-</select> &nbsp;
-</span>
+
 &nbsp;
 <input type="number" value="8" id="milis-val" class="inp-num" style="width: 50px; display:none;">
 
@@ -271,6 +261,7 @@
       <option value="1000">1000wpm</option>
       <option value="1100">1100wpm</option>
       <option value="1200">1200wpm</option>
+      <option value="1500">1500wpm</option>
     </select>
     
     <select id="wordsByFlash" onchange="wordsByFlash=n('wordsByFlash');">   
@@ -345,8 +336,8 @@ No fue muy efusivo. Rara vez lo era; pero creo que se alegró de verme. Casi sin
 
 <div id="footer" style="height: 300px; width:100%;">
 
-<div style="float: left; width: 100%; height: 250px; font-size: 50px;" id="footer-l"><br><center>A</center></div>
-<!-- <div style="float: left; width: 50%; height: 80px;" id="footer-r"><br><center>R</center></div> -->
+<div style="float: left; width: 50%; height: 250px; font-size: 50px;" id="footer-l"><br><center>A</center></div>
+<div style="float: left; width: 50%; height: 250px; font-size: 50px;" id="footer-r"><br><center>R</center></div> 
   
 </div>
 <div id="div-br">
@@ -399,6 +390,9 @@ No fue muy efusivo. Rara vez lo era; pero creo que se alegró de verme. Casi sin
 
     <? } ?>
     $("#menos1").click(); $("#menos1").click();
+
+ //    textoEn="To Sherlock Holmes she is always THE woman. I have seldom heard him mention her under any other name. In his eyes";
+ // $("#input1").val(textoEn);
 </script>
 
 
